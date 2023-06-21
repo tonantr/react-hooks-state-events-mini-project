@@ -1,16 +1,19 @@
 import React from "react";
 
-function NewTaskForm() {
+function NewTaskForm({categories, onTaskFormSubmit, onHandleTextChange, onHandleCategoryChange, text, category}) {
+
   return (
-    <form className="new-task-form">
+    <form className="new-task-form" onSubmit={onTaskFormSubmit}>
       <label>
         Details
-        <input type="text" name="text" />
+        <input type="text" name="text" value={text} onChange={onHandleTextChange}/>
       </label>
       <label>
         Category
-        <select name="category">
-          {/* render <option> elements for each category here */}
+        <select name="category" value={category} onChange={onHandleCategoryChange}>
+          {categories.map((category, index) => (
+            <option key={index}>{category}</option>
+          ))}
         </select>
       </label>
       <input type="submit" value="Add task" />
